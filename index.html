@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMU LABS | Mojeeb — توسعه‌دهنده وب</title>
+    <meta name="description"
+        content="AMU LABS — پورتفولیوی مجیب، توسعه‌دهنده PHP/MySQL و دانشجوی کمپیوترساینس. Web developer portfolio for Afghan business systems.">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="icon"  href="photo/Amu logo.png" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#FFFFFF',
+                        paper2: '#F7F4FD',
+                        ink: '#1E1533',
+                        surface: '#FFFFFF',
+                        surface2: '#F7F4FD',
+                        line: '#E4DBF5',
+                        primary: {
+                            50: '#F3EEFF', 100: '#E4D8FF', 200: '#C9B3FF', 300: '#A780FF',
+                            400: '#8B57F5', 500: '#7C3AED', 600: '#6D28D9', 700: '#5B21B6',
+                            800: '#4C1D95', 900: '#3B1678'
+                        },
+                        river: { DEFAULT: '#7C3AED', light: '#C4B5FD', deep: '#5B21B6' },
+                        mist: '#5B21B6',
+                    },
+                    fontFamily: {
+                        display: ['Vazirmatn', 'sans-serif'],
+                        body: ['Vazirmatn', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    boxShadow: {
+                        glow: '0 0 0 1px rgba(124,58,237,0.35), 0 20px 60px -15px rgba(124,58,237,0.55)',
+                        river: '0 0 0 1px rgba(124,58,237,0.25), 0 10px 40px -10px rgba(124,58,237,0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            color-scheme: light;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+
+        .bg-surface.border-line {
+            box-shadow: 0 1px 2px rgba(30, 21, 51, .04), 0 14px 32px -16px rgba(91, 33, 182, .22);
+        }
+
+        /* ---- Ambient mountain + river backdrop ---- */
+        .peaks {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .peak {
+            position: absolute;
+            bottom: -2%;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+
+        .peak-parallax {
+            will-change: transform;
+            transition: transform .1s linear;
+        }
+
+        .river-flow {
+            stroke-dasharray: 10 14;
+            animation: flow 3.2s linear infinite;
+        }
+
+        @keyframes flow {
+            to {
+                stroke-dashoffset: -240;
+            }
+        }
+
+        .drop-bounce {
+            animation: dropbounce 3.4s ease-in-out infinite;
+        }
+
+        @keyframes dropbounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* ---- Reveal on scroll ---- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- 3D tilt cards ---- */
+        .tilt {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .tilt-inner {
+            transition: transform .15s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        /* ---- River side-rail (desktop scrollspy) ---- */
+        .river-rail {
+            writing-mode: vertical-rl;
+        }
+
+        .rail-line {
+            background-image: repeating-linear-gradient(180deg, transparent 0 6px, rgba(124, 58, 237, .35) 6px 8px);
+        }
+
+        .rail-dot {
+            transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease;
+            box-shadow: 0 0 0 1px #D6C8F5;
+        }
+
+        .rail-dot.active {
+            background-color: #7C3AED;
+            box-shadow: 0 0 0 6px rgba(124, 58, 237, .18);
+            transform: scale(1.35);
+        }
+
+        /* ---- language visibility ---- */
+        .en-text.hidden,
+        .fa-text.hidden {
+            display: none;
+        }
+
+        ::selection {
+            background: #7C3AED;
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F7F4FD;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #D6C8F5;
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid #7C3AED;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: .001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-paper text-ink font-body antialiased selection:bg-primary-600">
+
+    <!-- ============ RIVER SIDE RAIL (desktop scrollspy) ============ -->
+    <nav aria-hidden="true"
+        class="hidden lg:flex fixed top-1/2 -translate-y-1/2 start-6 z-40 flex-col items-center gap-0 h-[64vh]">
+        <div class="relative h-full w-6 flex items-center justify-center">
+            <div class="rail-line absolute top-0 bottom-0 w-[2px] rounded-full"></div>
+            <div class="relative h-full w-full flex flex-col justify-between py-1" id="railDots">
+                <button data-target="hero" class="rail-dot w-2.5 h-2.5 rounded-full bg-line mx-auto"
+                    aria-label="Home"></button>
+                <button data-target="about" class="rail-dot w-2.5 h-2.5 rounded-full bg-line mx-auto"
+                    aria-label="About"></button>
+                <button data-target="skills" class="rail-dot w-2.5 h-2.5 rounded-full bg-line mx-auto"
+                    aria-label="Skills"></button>
+                <button data-target="portfolio" class="rail-dot w-2.5 h-2.5 rounded-full bg-line mx-auto"
+                    aria-label="Portfolio"></button>
+                <button data-target="contact" class="rail-dot w-2.5 h-2.5 rounded-full bg-line mx-auto"
+                    aria-label="Contact"></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ TOP NAVBAR ============ -->
+    <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-paper/70 border-b border-line/60">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+            <a href="#hero" class="flex items-center gap-2.5 shrink-0">
+                <img src="/Amulogo.png" alt="AMU LABS logo" class="w-9 h-9 rounded-full object-cover">
+                <span class="font-display font-extrabold tracking-wide text-lg">AMU <span
+                        class="text-river">LABS</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-ink/80">
+                <a href="#about" class="hover:text-river transition-colors">
+                    <span class="fa-text">درباره من</span><span class="en-text hidden">About</span>
+                </a>
+                <a href="#skills" class="hover:text-river transition-colors">
+                    <span class="fa-text">مهارت‌ها</span><span class="en-text hidden">Skills</span>
+                </a>
+                <a href="#portfolio" class="hover:text-river transition-colors">
+                    <span class="fa-text">نمونه کارها</span><span class="en-text hidden">Portfolio</span>
+                </a>
+                <a href="#contact" class="hover:text-river transition-colors">
+                    <span class="fa-text">تماس</span><span class="en-text hidden">Contact</span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2.5">
+                <button id="langToggle"
+                    class="flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-mono font-semibold text-ink/85 hover:border-river hover:text-river transition-colors">
+                    <span id="langToggleLabel">EN</span>
+                </button>
+                <a href="#contact"
+                    class="hidden sm:inline-flex items-center rounded-full bg-primary-600 hover:bg-primary-500 transition-colors px-4 py-2 text-sm font-semibold shadow-glow">
+                    <span class="fa-text text-white">تماس بگیرید</span><span class="en-text hidden text-white">Get in touch</span>
+                </a>
+                <button id="menuBtn"
+                    class="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-line"
+                    aria-label="Menu">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- mobile menu -->
+        <div id="mobileMenu"
+            class="md:hidden hidden border-t border-line/60 bg-paper/95 px-5 py-4 flex flex-col gap-4 text-sm font-medium">
+            <a href="#about" class="menu-link"><span class="fa-text">درباره من</span><span
+                    class="en-text hidden">About</span></a>
+            <a href="#skills" class="menu-link"><span class="fa-text">مهارت‌ها</span><span
+                    class="en-text hidden">Skills</span></a>
+            <a href="#portfolio" class="menu-link"><span class="fa-text">نمونه کارها</span><span
+                    class="en-text hidden">Portfolio</span></a>
+            <a href="#contact" class="menu-link"><span class="fa-text">تماس</span><span
+                    class="en-text hidden">Contact</span></a>
+        </div>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="relative min-h-[100svh] flex items-center pt-24 pb-16 overflow-hidden">
+
+        <div class="peaks" id="peaks">
+            <svg class="peak peak-parallax" data-depth="0.10" viewBox="0 0 1440 420" preserveAspectRatio="none"
+                style="opacity:.07; mix-blend-mode:multiply">
+                <polygon points="0,420 0,260 220,120 420,240 640,90 900,230 1140,110 1300,220 1440,160 1440,420"
+                    fill="#3B1678" />
+            </svg>
+            <svg class="peak peak-parallax" data-depth="0.22" viewBox="0 0 1440 380" preserveAspectRatio="none"
+                style="opacity:.11; mix-blend-mode:multiply">
+                <polygon points="0,380 0,300 180,190 360,300 560,170 780,290 1000,180 1220,290 1440,220 1440,380"
+                    fill="#4C1D95" />
+            </svg>
+            <svg class="peak peak-parallax" data-depth="0.36" viewBox="0 0 1440 320" preserveAspectRatio="none"
+                style="opacity:.16; mix-blend-mode:multiply">
+                <polygon points="0,320 0,270 240,190 460,270 700,170 940,260 1180,200 1440,260 1440,320"
+                    fill="#5B21B6" />
+            </svg>
+            <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 90" preserveAspectRatio="none">
+                <path d="M0,40 C240,80 380,10 620,45 C860,80 1000,15 1220,50 C1320,68 1400,45 1440,55" fill="none"
+                    stroke="#7C3AED" stroke-width="2.5" class="river-flow" opacity="0.45" />
+            </svg>
+        </div>
+
+        <div
+            class="relative max-w-7xl mx-auto px-5 sm:px-8 w-full grid lg:grid-cols-[1.15fr_.85fr] gap-14 items-center">
+            <div class="reveal">
+                <p
+                    class="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-river uppercase mb-6 border border-river/30 bg-river/5 rounded-full ps-3 pe-4 py-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-river drop-bounce"></span>
+                    <span class="fa-text">توسعه‌دهنده وب · PHP + MySQL</span>
+                    <span class="en-text hidden">Web Developer · PHP + MySQL</span>
+                </p>
+
+                <h1 class="font-display font-extrabold leading-[1.08] text-4xl sm:text-5xl lg:text-6xl mb-6">
+                    <span class="fa-text">سیستم‌های وب که<br><span
+                            class="text-transparent  bg-clip-text bg-gradient-to-l from-primary-600 to-primary-800" >واقعاً
+                            کار می‌کنند</span></span>
+                    <span class="en-text hidden">Web systems that<br><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">actually
+                            work</span></span>
+                </h1>
+
+                <p class="fa-text text-ink/70 text-lg leading-relaxed max-w-xl mb-9">
+                     مجیب استم — دانشجوی سمستر چهارم کمپیوترساینس و توسعه‌دهنده PHP/MySQL. سیستم‌های مدیریت کسب‌وکار برای
+                    شرکت‌های افغان می‌سازم؛ از مالی گرفته تا دواخانه و مدیریت چک و رسید.
+                </p>
+                <p class="en-text hidden text-ink/70 text-lg leading-relaxed max-w-xl mb-9">
+                    I'm Mojeeb — a 4th-semester Computer Science student and PHP/MySQL developer. I build business
+                    management systems for Afghan companies, from finance to pharmacy to check &amp; receipt tracking.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 mb-12">
+                    <a href="#portfolio"
+                        class="inline-flex items-center gap-2 rounded-full bg-primary-600 hover:bg-primary-500 transition-all hover:-translate-y-0.5 px-6 py-3.5 font-semibold shadow-glow">
+                        <span class="fa-text text-white">مشاهده نمونه کارها</span><span class="en-text hidden text-white">View
+                            Portfolio</span>
+                    </a>
+                    <a id="heroWhatsapp" href="https://wa.me/+93745647237" target="_blank" rel="noopener"
+                        class="inline-flex items-center gap-2 rounded-full border border-line bg-surface hover:border-[#25D366] hover:text-[#25D366] transition-all hover:-translate-y-0.5 px-6 py-3.5 font-semibold">
+                        <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor">
+                            <path
+                                d="M16.001 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.508.693 4.85 1.897 6.855L2.667 29.333l6.65-1.844A13.29 13.29 0 0 0 16 29.333c7.361 0 13.333-5.972 13.333-13.333S23.362 2.667 16.001 2.667Zm7.652 18.943c-.322.906-1.594 1.658-2.612 1.878-.694.148-1.6.266-4.653-.999-3.905-1.618-6.418-5.585-6.613-5.844-.187-.259-1.588-2.112-1.588-4.03s.996-2.862 1.35-3.253c.322-.354.699-.44.933-.44.234 0 .467.002.671.013.216.011.503-.082.787.6.291.7.99 2.414 1.077 2.59.087.176.145.383.029.618-.117.235-.176.383-.352.588-.176.205-.372.457-.53.615-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.44 1.348 1.202 2.485 1.575 2.838 1.75.352.176.557.147.762-.088.206-.235.878-1.02 1.113-1.37.234-.353.469-.294.79-.176.323.117 2.045.965 2.397 1.14.352.176.586.264.674.412.088.147.088.851-.234 1.757Z" />
+                        </svg>
+                        <span class="fa-text">گفتگو در واتساپ</span><span class="en-text hidden">Chat on WhatsApp</span>
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-xs text-ink/50">
+                    <span><span class="text-ink font-semibold">04</span> <span class="fa-text">پروژه کامل</span><span
+                            class="en-text hidden">Completed projects</span></span>
+                    <span class="w-1 h-1 rounded-full bg-line hidden sm:block"></span>
+                    <span><span class="text-ink font-semibold"><span class="fa-text">سمستر ۴</span><span
+                                class="en-text hidden">Semester 4</span></span> <span
+                            class="fa-text">کمپیوترساینس</span><span class="en-text hidden">Computer
+                            Science</span></span>
+                    <span class="w-1 h-1 rounded-full bg-line hidden sm:block"></span>
+                    <span class="fa-text">مبتنی در افغانستان</span><span class="en-text hidden">Based in
+                        Afghanistan</span>
+                </div>
+            </div>
+
+            <div class="reveal flex justify-center lg:justify-end" style="transition-delay:.1s">
+                <div class="tilt" id="photoTilt">
+                    <div
+                        class="tilt-inner relative w-64 sm:w-80 rounded-[2rem] p-2 bg-gradient-to-b from-primary-600/40 to-river/30 shadow-glow">
+                        <img src="/profile.png" alt="Mojeeb — Web Developer"
+                            class="w-full aspect-[4/5] object-cover rounded-[1.6rem] border border-black/5">
+                        <div
+                            class="absolute -bottom-5 -start-5 bg-surface border border-line rounded-2xl px-4 py-3 shadow-river">
+                            <p class="font-mono text-[11px] text-river tracking-wide">AMU LABS</p>
+                            <p class="fa-text text-sm font-semibold">مجیب — توسعه‌دهنده</p>
+                            <p class="en-text hidden text-sm font-semibold">Mojeeb — Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#about" aria-label="Scroll down"
+            class="hidden sm:flex absolute bottom-8 start-1/2 -translate-x-1/2 flex-col items-center gap-2 text-ink/40 hover:text-river transition-colors">
+            <span class="font-mono text-[10px] tracking-widest">SCROLL</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+        </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="relative py-24 sm:py-32 border-t border-line/50">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-14 items-start">
+
+            <div class="reveal">
+                <p class="font-mono text-xs tracking-widest text-river uppercase mb-3">
+                    <span class="fa-text">۰۱ — درباره</span><span class="en-text hidden">01 — About</span>
+                </p>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl leading-tight mb-6">
+                    <span class="fa-text">از دانشگاه تا سیستم‌های واقعی</span>
+                    <span class="en-text hidden">From classroom to real systems</span>
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="rounded-xl border border-line bg-surface px-4 py-3 text-center min-w-[7.5rem]">
+                        <span class="block font-display font-bold text-xl text-river">4</span>
+                        <span class="fa-text text-[11px] text-ink/60">سمستر کمپیوترساینس</span>
+                        <span class="en-text hidden text-[11px] text-ink/60">CS Semester</span>
+                    </span>
+                    <span class="rounded-xl border border-line bg-surface px-4 py-3 text-center min-w-[7.5rem]">
+                        <span class="block font-display font-bold text-xl text-river">9+</span>
+                        <span class="fa-text text-[11px] text-ink/60">مهارت فنی</span>
+                        <span class="en-text hidden text-[11px] text-ink/60">Tech Skills</span>
+                    </span>
+                    <span class="rounded-xl border border-line bg-surface px-4 py-3 text-center min-w-[7.5rem]">
+                        <span class="block font-display font-bold text-xl text-river">RTL</span>
+                        <span class="fa-text text-[11px] text-ink/60">رابط دری/فارسی</span>
+                        <span class="en-text hidden text-[11px] text-ink/60">Dari/Persian UI</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="reveal" style="transition-delay:.1s">
+                <p class="fa-text text-ink/75 text-lg leading-loose mb-5">
+                    استم مجیب، دانشجوی سمستر چهارم کمپیوترساینس و توسعه‌دهنده وب که روی سیستم‌های مدیریت کسب‌وکار برای
+                    شرکت‌های افغان کار می‌کنم. از سیستم‌های مالی گرفته تا دواخانه و مدیریت چک و رسید، تمرکزم روی ساختن
+                    ابزارهای عملی و قابل‌اعتماد است — با رابط راست‌به‌چپ دری/فارسی و در نظرگرفتن نیازهای واقعی
+                    کسب‌وکارهای محلی.
+                </p>
+                <p class="fa-text text-ink/75 text-lg leading-loose mb-8">
+                    رویکرد کارم دیتابیس‌محور است: طراحی ساختار MySQL در phpMyAdmin، ساختن ماژول‌های CRUD، و پرداختن
+                    مرحله‌به‌مرحله به رابط کاربری. در کنار این‌ها، در زمینه IT پایه هم توانایی دارم — نصب و عیب‌یابی
+                    سیستم، شبکه‌های ساده و پشتیبانی کامپیوتر.
+                </p>
+
+                <p class="en-text hidden text-ink/75 text-lg leading-loose mb-5">
+                    I'm Mojeeb, a 4th-semester Computer Science student and web developer focused on business management
+                    systems for Afghan companies. From financial systems to pharmacy management and check/receipt
+                    tracking, I build practical, reliable tools — with RTL Dari/Persian interfaces designed around the
+                    real needs of local businesses.
+                </p>
+                <p class="en-text hidden text-ink/75 text-lg leading-loose mb-8">
+                    My approach is database-first: designing MySQL schemas in phpMyAdmin, building single-purpose CRUD
+                    modules, then refining the interface step by step. Alongside development, I'm also comfortable with
+                    basic IT — system setup, troubleshooting, simple networking, and computer support.
+                </p>
+
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="rounded-2xl border border-line bg-surface p-5">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"
+                            class="mb-3">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                        </svg>
+                        <p class="fa-text font-semibold mb-1">توسعه Full-Stack</p>
+                        <p class="en-text hidden font-semibold mb-1">Full-Stack Development</p>
+                        <p class="fa-text text-sm text-ink/55">فرانت‌اند، بک‌اند و دیتابیس</p>
+                        <p class="en-text hidden text-sm text-ink/55">Frontend, backend &amp; database</p>
+                    </div>
+                    <div class="rounded-2xl border border-line bg-surface p-5">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"
+                            class="mb-3">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 3" />
+                        </svg>
+                        <p class="fa-text font-semibold mb-1">راه‌حل‌های عملی</p>
+                        <p class="en-text hidden font-semibold mb-1">Practical Solutions</p>
+                        <p class="fa-text text-sm text-ink/55">متناسب با کسب‌وکار افغان</p>
+                        <p class="en-text hidden text-sm text-ink/55">Built for Afghan businesses</p>
+                    </div>
+                    <div class="rounded-2xl border border-line bg-surface p-5">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"
+                            class="mb-3">
+                            <path d="M4 6h16M4 12h16M4 18h10" />
+                        </svg>
+                        <p class="fa-text font-semibold mb-1">پشتیبانی IT پایه</p>
+                        <p class="en-text hidden font-semibold mb-1">Basic IT Support</p>
+                        <p class="fa-text text-sm text-ink/55">نصب، عیب‌یابی و شبکه ساده</p>
+                        <p class="en-text hidden text-sm text-ink/55">Setup, troubleshooting &amp; networking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="relative py-24 sm:py-32 border-t border-line/50 bg-paper2">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="reveal max-w-2xl mb-14">
+                <p class="font-mono text-xs tracking-widest text-river uppercase mb-3">
+                    <span class="fa-text">۰۲ — ابزارها</span><span class="en-text hidden">02 — Toolset</span>
+                </p>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl leading-tight">
+                    <span class="fa-text">تکنالوژی‌هایی که هر روز با آن‌ها کار می‌کنم</span>
+                    <span class="en-text hidden">Technologies I work with every day</span>
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Frontend group -->
+                <div class="reveal lg:col-span-3">
+                    <p class="font-mono text-[11px] tracking-widest text-ink/40 uppercase mb-4">
+                        <span class="fa-text">فرانت‌اند</span><span class="en-text hidden">Frontend</span>
+                    </p>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/html5/E34F26" class="w-9 h-9" alt="HTML5">
+                                <div>
+                                    <p class="font-semibold">HTML5</p>
+                                    <p class="fa-text text-xs text-ink/50">ساختار صفحات وب</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Page structure</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="/css.jpg" class="w-9 h-9" alt="CSS3">
+                                <div>
+                                    <p class="font-semibold">CSS3</p>
+                                    <p class="fa-text text-xs text-ink/50">استایل و طراحی</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Styling &amp; layout</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/tailwindcss/38BDF8" class="w-9 h-9"
+                                    alt="Tailwind CSS">
+                                <div>
+                                    <p class="font-semibold">Tailwind CSS</p>
+                                    <p class="fa-text text-xs text-ink/50">طراحی سریع و منظم</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Utility-first design</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/javascript/F7DF1E" class="w-9 h-9"
+                                    alt="JavaScript">
+                                <div>
+                                    <p class="font-semibold">JavaScript</p>
+                                    <p class="fa-text text-xs text-ink/50">تعامل و منطق کلاینت</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Client-side logic</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/bootstrap/7952B3" class="w-9 h-9" alt="Bootstrap">
+                                <div>
+                                    <p class="font-semibold">Bootstrap</p>
+                                    <p class="fa-text text-xs text-ink/50">کامپوننت‌های آماده</p>
+                                    <p class="en-text hidden text-xs text-ink/50">UI components</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-primary-500/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/jquery/0769AD" class="w-9 h-9" alt="jQuery">
+                                <div>
+                                    <p class="font-semibold">jQuery</p>
+                                    <p class="fa-text text-xs text-ink/50">مدیریت DOM و AJAX</p>
+                                    <p class="en-text hidden text-xs text-ink/50">DOM &amp; AJAX handling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend group -->
+                <div class="reveal lg:col-span-3 mt-6">
+                    <p class="font-mono text-[11px] tracking-widest text-ink/40 uppercase mb-4">
+                        <span class="fa-text">بک‌اند و دیتابیس</span><span class="en-text hidden">Backend &amp;
+                            Database</span>
+                    </p>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-river/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/php/777BB4" class="w-9 h-9" alt="PHP">
+                                <div>
+                                    <p class="font-semibold">PHP</p>
+                                    <p class="fa-text text-xs text-ink/50">منطق سمت سرور</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Server-side logic</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-river/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/mysql/4479A1" class="w-9 h-9" alt="MySQL">
+                                <div>
+                                    <p class="font-semibold">MySQL</p>
+                                    <p class="fa-text text-xs text-ink/50">طراحی دیتابیس</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Database design</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-river/60 transition-colors">
+                                <img src="https://cdn.simpleicons.org/phpmyadmin/6C78AF" class="w-9 h-9"
+                                    alt="phpMyAdmin">
+                                <div>
+                                    <p class="font-semibold">phpMyAdmin</p>
+                                    <p class="fa-text text-xs text-ink/50">مدیریت دیتابیس</p>
+                                    <p class="en-text hidden text-xs text-ink/50">DB administration</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tilt skill-card">
+                            <div
+                                class="tilt-inner rounded-2xl border border-line bg-surface p-5 flex items-center gap-4 hover:border-river/60 transition-colors">
+                                <span class="w-9 h-9 rounded-lg bg-primary-700/40 flex items-center justify-center">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9B8F7"
+                                        stroke-width="1.8">
+                                        <rect x="3" y="4" width="18" height="13" rx="1.5" />
+                                        <path d="M8 21h8M12 17v4" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <p class="fa-text font-semibold">IT پایه</p>
+                                    <p class="en-text hidden font-semibold">Basic IT</p>
+                                    <p class="fa-text text-xs text-ink/50">نصب، عیب‌یابی، شبکه</p>
+                                    <p class="en-text hidden text-xs text-ink/50">Setup, troubleshooting, networking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PORTFOLIO ============ -->
+    <section id="portfolio" class="relative py-24 sm:py-32 border-t border-line/50">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="reveal max-w-2xl mb-14">
+                <p class="font-mono text-xs tracking-widest text-river uppercase mb-3">
+                    <span class="fa-text">۰۳ — نمونه کارها</span><span class="en-text hidden">03 — Selected Work</span>
+                </p>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl leading-tight mb-4">
+                    <span class="fa-text">سیستم‌هایی که برای کسب‌وکارهای واقعی ساختم</span>
+                    <span class="en-text hidden">Systems built for real businesses</span>
+                </h2>
+                <p class="fa-text text-ink/60">تصاویر زیر جای‌نگه‌دار هستند — به‌زودی با اسکرین‌شات پروژه واقعی جایگزین
+                    می‌شوند.</p>
+                <p class="en-text hidden text-ink/60">Thumbnails below are placeholders — swap in real project
+                    screenshots any time.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-7">
+
+                <!-- Project 1 -->
+                <article class="reveal tilt group">
+                    <div
+                        class="tilt-inner rounded-3xl border border-line bg-surface overflow-hidden hover:shadow-glow transition-shadow">
+                        <!-- PLACEHOLDER THUMBNAIL: replace with style="background-image:url('assets/project-smart-finance.jpg')" and remove the icon/gradient below -->
+                        <div
+                            class="relative aspect-[4/3] bg-gradient-to-br from-primary-700 via-primary-600 to-river/60 flex items-center justify-center overflow-hidden">
+                             <img src="/smart.jpeg" alt="" class="w-full h-full object-contain">
+                            <svg class="absolute -bottom-6 -end-6 opacity-20 pointer-events-none" width="160" height="160"
+                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                                <path d="M3 3v18h18" />
+                                <path d="M7 15l4-5 3 3 5-7" />
+                            </svg>
+                            <svg class="hidden" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="white"
+                                stroke-width="1.6">
+                                <path d="M3 3v18h18" />
+                                <path d="M7 15l4-5 3 3 5-7" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-display font-bold text-lg">Smart Finance</h3>
+                                <span
+                                    class="font-mono text-[10px] text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-2.5 py-1">
+                                    <span class="fa-text">فعال</span><span class="en-text hidden">Active</span>
+                                </span>
+                            </div>
+                            <p class="fa-text text-sm text-ink/60 leading-relaxed mb-4">سیستم جامع مدیریت مالی
+                                چند-مستأجره با ماژول‌های فروش، خرید، مشتریان و تأمین‌کنندگان — رابط کاملاً راست‌به‌چپ
+                                دری.</p>
+                            <p class="en-text hidden text-sm text-ink/60 leading-relaxed mb-4">Multi-tenant financial
+                                management system with sales, purchasing, customer, and supplier modules — full RTL Dari
+                                interface.</p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-mist">
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">PHP</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">MySQL</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">Multi-tenant</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="reveal tilt group" style="transition-delay:.05s">
+                    <div
+                        class="tilt-inner rounded-3xl border border-line bg-surface overflow-hidden hover:shadow-glow transition-shadow">
+                        <!-- PLACEHOLDER THUMBNAIL: replace with style="background-image:url('assets/project-arya-med.jpg')" and remove the icon/gradient below -->
+                        <div
+                            class="relative aspect-[4/3] bg-gradient-to-br from-river-deep via-river to-primary-600/60 flex items-center justify-center overflow-hidden">
+                            <img src="/arya.png" alt="" class="w-full h-full object-contain">
+                            <svg class="absolute -bottom-6 -end-6 opacity-20 pointer-events-none" width="160" height="160"
+                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                                <path d="M10.5 20.5 3 13a5 5 0 1 1 7-7l7.5 7.5a5 5 0 1 1-7 7Z" />
+                                <path d="M8.5 8.5l7 7" />
+                            </svg>
+                            <svg class="hidden" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="white"
+                                stroke-width="1.6">
+                                <path d="M10.5 20.5 3 13a5 5 0 1 1 7-7l7.5 7.5a5 5 0 1 1-7 7Z" />
+                                <path d="M8.5 8.5l7 7" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-display font-bold text-lg">ARYA MED</h3>
+                                <span
+                                    class="font-mono text-[10px] text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-2.5 py-1">
+                                    <span class="fa-text">فعال</span><span class="en-text hidden">Active</span>
+                                </span>
+                            </div>
+                            <p class="fa-text text-sm text-ink/60 leading-relaxed mb-4">سیستم مدیریت دواخانه با پشتیبانی
+                                قیمت‌گذاری دالر/افغانی، صندوق نقدی، مدیریت شفت و گزارش‌گیری کامل.</p>
+                            <p class="en-text hidden text-sm text-ink/60 leading-relaxed mb-4">Pharmacy management
+                                system with USD/AFN dual pricing, cash register &amp; shift handling, and full
+                                reporting.</p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-mist">
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">PHP</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">MySQL</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">Inventory</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="reveal tilt group">
+                    <div
+                        class="tilt-inner rounded-3xl border border-line bg-surface overflow-hidden hover:shadow-glow transition-shadow">
+                        <!-- PLACEHOLDER THUMBNAIL: replace with style="background-image:url('assets/project-nawid-mazar.jpg')" and remove the icon/gradient below -->
+                        <div
+                            class="relative aspect-[4/3] bg-gradient-to-br from-primary-800 via-primary-600 to-river/50 flex items-center justify-center overflow-hidden">
+                             <img src="/image.png" alt="" class="w-full h-full object-contain">
+                            <svg class="absolute -bottom-6 -end-6 opacity-20 pointer-events-none" width="160" height="160"
+                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <path d="M8 9h8M8 13h5" />
+                            </svg>
+                            <svg class="hidden" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="white"
+                                stroke-width="1.6">
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <path d="M8 9h8M8 13h5" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-display font-bold text-lg">Hoshmand studio website</h3>
+                                <span
+                                    class="font-mono text-[10px] text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-2.5 py-1">
+                                    <span class="fa-text">فعال</span><span class="en-text hidden">Active</span>
+                                </span>
+                            </div>
+                            <p class="fa-text text-sm text-ink/60 leading-relaxed mb-4"> وبسایت هوشمند استودیو 
+                          خدمات دیجیتال و پرداخت‌های مختلف و اسپانسر  را انجام میدهند</p> 
+                            <p class="en-text hidden text-sm text-ink/60 leading-relaxed mb-4">
+                                Hoshmand studio website provides a range of digital services and payment types.</p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-mist">
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">PHP</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">MySQL</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">Role-based</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="reveal tilt group" style="transition-delay:.05s">
+                    <div
+                        class="tilt-inner rounded-3xl border border-line bg-surface overflow-hidden hover:shadow-glow transition-shadow">
+                        <!-- PLACEHOLDER THUMBNAIL: replace with style="background-image:url('assets/project-amu-labs.jpg')" and remove the icon/gradient below -->
+                        <div
+                            class="relative aspect-[4/3] bg-gradient-to-br from-river via-primary-500 to-primary-800 flex items-center justify-center overflow-hidden">
+                            <img src="/salaam.png" alt="" class="w-full h-full object-contain">
+                            <svg class="absolute -bottom-6 -end-6 opacity-20 pointer-events-none" width="160" height="160"
+                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                                <path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z" />
+                                <path d="M4 12h16M12 4a12 12 0 0 1 0 16 12 12 0 0 1 0-16Z" />
+                            </svg>
+                            <svg class="hidden" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="white"
+                                stroke-width="1.6">
+                                <path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z" />
+                                <path d="M4 12h16M12 4a12 12 0 0 1 0 16 12 12 0 0 1 0-16Z" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-display font-bold text-lg">Salaam website</h3>
+                                <span
+                                    class="font-mono text-[10px] text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-2.5 py-1">
+                                    <span class="fa-text">فعال</span><span class="en-text hidden">Active</span>
+                                </span>
+                            </div>
+                            <p class="fa-text text-sm text-ink/60 leading-relaxed mb-4">وب‌سایت  توریستی و
+                                خدمات  توریستی از هر جای دنیا را انجام میدهند</p>
+                            <p class="en-text hidden text-sm text-ink/60 leading-relaxed mb-4">A tourist
+                                website with tourist services from anywhere in the world.</p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-mist">
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">html</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">taillwindcss</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">CSS</span>
+                                <span class="bg-primary-700/30 rounded-md px-2 py-1">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="relative py-24 sm:py-32 border-t border-line/50 bg-paper2 overflow-hidden">
+        <svg class="absolute -top-10 -start-10 opacity-[.07]" width="360" height="360" viewBox="0 0 24 24"
+            fill="currentColor">
+            <circle cx="12" cy="12" r="10" />
+        </svg>
+        <div class="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
+            <p class="font-mono text-xs tracking-widest text-river uppercase mb-3">
+                <span class="fa-text">۰۴ — تماس</span><span class="en-text hidden">04 — Contact</span>
+            </p>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl leading-tight mb-5">
+                <span class="fa-text">برای پروژه بعدی حاضرم</span>
+                <span class="en-text hidden">Ready for your next project</span>
+            </h2>
+            <p class="fa-text text-ink/65 text-lg mb-10">اگر به یک سیستم مدیریت کسب‌وکار، دواخانه، یا هر ابزار وب دیگری
+                نیاز دارید — پیام بفرستید.</p>
+            <p class="en-text hidden text-ink/65 text-lg mb-10">Need a business management system, a pharmacy tool, or
+                any other web app? Send a message.</p>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <a href="https://wa.me/+93745647237" target="_blank" rel="noopener"
+                    class="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:brightness-110 transition-all hover:-translate-y-0.5 px-7 py-4 font-semibold text-ink">
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor">
+                        <path
+                            d="M16.001 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.508.693 4.85 1.897 6.855L2.667 29.333l6.65-1.844A13.29 13.29 0 0 0 16 29.333c7.361 0 13.333-5.972 13.333-13.333S23.362 2.667 16.001 2.667Zm7.652 18.943c-.322.906-1.594 1.658-2.612 1.878-.694.148-1.6.266-4.653-.999-3.905-1.618-6.418-5.585-6.613-5.844-.187-.259-1.588-2.112-1.588-4.03s.996-2.862 1.35-3.253c.322-.354.699-.44.933-.44.234 0 .467.002.671.013.216.011.503-.082.787.6.291.7.99 2.414 1.077 2.59.087.176.145.383.029.618-.117.235-.176.383-.352.588-.176.205-.372.457-.53.615-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.44 1.348 1.202 2.485 1.575 2.838 1.75.352.176.557.147.762-.088.206-.235.878-1.02 1.113-1.37.234-.353.469-.294.79-.176.323.117 2.045.965 2.397 1.14.352.176.586.264.674.412.088.147.088.851-.234 1.757Z" />
+                    </svg>
+                    <span class="fa-text">چت در واتساپ</span><span class="en-text hidden">Chat on WhatsApp</span>
+                </a>
+                <a href="mailto:mojeebnoori562@gmail.com"
+                    class="inline-flex items-center gap-2 rounded-full border border-line bg-surface hover:border-river hover:text-river transition-all hover:-translate-y-0.5 px-7 py-4 font-semibold">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <path d="m4 7 8 6 8-6" />
+                    </svg>
+                    <span class="fa-text">ایمیل</span><span class="en-text hidden">Email</span>
+                </a>
+            </div>
+
+            <div class="flex justify-center gap-4">
+                <a href="https://github.com/mojeeb883" aria-label="GitHub"
+                    class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-river hover:text-river transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.65.5.5 5.66.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.13-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.71 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a10.98 10.98 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.44-2.7 5.42-5.27 5.7.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .32.2.68.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.66 18.35.5 12 .5Z" />
+                    </svg>
+                </a>
+                <a href="https://t.me/mojeeb324" target="_blank" rel="noopener" aria-label="Telegram"
+                    class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-river hover:text-river transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21.94 3.36 18.7 20.2c-.24 1.07-.88 1.33-1.78.83l-4.93-3.63-2.38 2.29c-.26.26-.49.49-1 .49l.36-5.05L18.4 6.06c.44-.4-.1-.62-.68-.22L6.05 13.36 1.2 11.83c-1.05-.33-1.07-1.05.22-1.55L20.6 2.28c.88-.32 1.65.2 1.34 1.08Z" />
+                    </svg>
+                </a>
+                <a href="https://wa.me/+93745647237" target="_blank" rel="noopener" aria-label="WhatsApp"
+                    class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-[#25D366] hover:text-[#25D366] transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor">
+                        <path
+                            d="M16.001 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.508.693 4.85 1.897 6.855L2.667 29.333l6.65-1.844A13.29 13.29 0 0 0 16 29.333c7.361 0 13.333-5.972 13.333-13.333S23.362 2.667 16.001 2.667Zm7.652 18.943c-.322.906-1.594 1.658-2.612 1.878-.694.148-1.6.266-4.653-.999-3.905-1.618-6.418-5.585-6.613-5.844-.187-.259-1.588-2.112-1.588-4.03s.996-2.862 1.35-3.253c.322-.354.699-.44.933-.44.234 0 .467.002.671.013.216.011.503-.082.787.6.291.7.99 2.414 1.077 2.59.087.176.145.383.029.618-.117.235-.176.383-.352.588-.176.205-.372.457-.53.615-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.44 1.348 1.202 2.485 1.575 2.838 1.75.352.176.557.147.762-.088.206-.235.878-1.02 1.113-1.37.234-.353.469-.294.79-.176.323.117 2.045.965 2.397 1.14.352.176.586.264.674.412.088.147.088.851-.234 1.757Z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="border-t border-line/60 py-10">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="#hero" class="flex items-center gap-2.5">
+                <img src="/Amulogo.png" alt="AMU LABS logo" class="w-8 h-8 rounded-full object-cover">
+                <span class="font-display font-bold tracking-wide">AMU <span class="text-river">LABS</span></span>
+            </a>
+            <p class="font-mono text-xs text-ink/40">
+                <span class="fa-text">© ۱۴۰۵ AMU LABS — تمام حقوق محفوظ است</span>
+                <span class="en-text hidden">© 2026 AMU LABS — All rights reserved</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============ FLOATING WHATSAPP BUTTON ============ -->
+    <a href="https://wa.me/+93745647237" target="_blank" rel="noopener" aria-label="WhatsApp"
+        class="fixed bottom-6 end-6 z-50 w-14 h-14 rounded-full bg-[#25D366] shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="white">
+            <path
+                d="M16.001 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.508.693 4.85 1.897 6.855L2.667 29.333l6.65-1.844A13.29 13.29 0 0 0 16 29.333c7.361 0 13.333-5.972 13.333-13.333S23.362 2.667 16.001 2.667Zm7.652 18.943c-.322.906-1.594 1.658-2.612 1.878-.694.148-1.6.266-4.653-.999-3.905-1.618-6.418-5.585-6.613-5.844-.187-.259-1.588-2.112-1.588-4.03s.996-2.862 1.35-3.253c.322-.354.699-.44.933-.44.234 0 .467.002.671.013.216.011.503-.082.787.6.291.7.99 2.414 1.077 2.59.087.176.145.383.029.618-.117.235-.176.383-.352.588-.176.205-.372.457-.53.615-.176.176-.36.367-.155.72.206.353.914 1.508 1.963 2.44 1.348 1.202 2.485 1.575 2.838 1.75.352.176.557.147.762-.088.206-.235.878-1.02 1.113-1.37.234-.353.469-.294.79-.176.323.117 2.045.965 2.397 1.14.352.176.586.264.674.412.088.147.088.851-.234 1.757Z" />
+        </svg>
+    </a>
+
+    <script>
+        /* ---------- Language toggle (fa default / en) ---------- */
+        var currentLang = 'fa';
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+            document.querySelectorAll('.fa-text').forEach(function (el) { el.classList.toggle('hidden', lang !== 'fa'); });
+            document.querySelectorAll('.en-text').forEach(function (el) { el.classList.toggle('hidden', lang !== 'en'); });
+            document.getElementById('langToggleLabel').textContent = lang === 'fa' ? 'EN' : 'دری';
+        }
+        document.getElementById('langToggle').addEventListener('click', function () {
+            setLang(currentLang === 'fa' ? 'en' : 'fa');
+        });
+
+        /* ---------- Mobile menu ---------- */
+        var menuBtn = document.getElementById('menuBtn');
+        var mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', function () { mobileMenu.classList.toggle('hidden'); });
+        document.querySelectorAll('#mobileMenu a').forEach(function (a) {
+            a.addEventListener('click', function () { mobileMenu.classList.add('hidden'); });
+        });
+
+        /* ---------- Reveal on scroll ---------- */
+        var revealEls = document.querySelectorAll('.reveal');
+        var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) { entry.target.classList.add('in'); revealObserver.unobserve(entry.target); }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+        /* ---------- Mountain parallax ---------- */
+        var peaks = document.querySelectorAll('.peak-parallax');
+        window.addEventListener('scroll', function () {
+            var y = window.scrollY;
+            peaks.forEach(function (p) {
+                var depth = parseFloat(p.getAttribute('data-depth'));
+                p.style.transform = 'translateY(' + (y * depth) + 'px)';
+            });
+        }, { passive: true });
+
+        /* ---------- 3D tilt (desktop, hover-capable only) ---------- */
+        var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (canHover) {
+            document.querySelectorAll('.tilt').forEach(function (card) {
+                var inner = card.querySelector('.tilt-inner');
+                if (!inner) return;
+                card.addEventListener('mousemove', function (e) {
+                    var r = card.getBoundingClientRect();
+                    var px = (e.clientX - r.left) / r.width - 0.5;
+                    var py = (e.clientY - r.top) / r.height - 0.5;
+                    inner.style.transform = 'rotateY(' + (px * 10) + 'deg) rotateX(' + (py * -10) + 'deg) translateZ(6px)';
+                });
+                card.addEventListener('mouseleave', function () {
+                    inner.style.transform = 'rotateY(0) rotateX(0) translateZ(0)';
+                });
+            });
+        }
+
+        /* ---------- River rail scrollspy ---------- */
+        var sections = ['hero', 'about', 'skills', 'portfolio', 'contact'].map(function (id) { return document.getElementById(id); });
+        var dots = document.querySelectorAll('.rail-dot');
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                var target = document.getElementById(dot.getAttribute('data-target'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        var railObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var idx = sections.indexOf(entry.target);
+                if (entry.isIntersecting && idx > -1) {
+                    dots.forEach(function (d) { d.classList.remove('active'); });
+                    if (dots[idx]) dots[idx].classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(function (s) { if (s) railObserver.observe(s); });
+    </script>
+
+</body>
+
+</html>
